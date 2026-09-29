@@ -11,7 +11,6 @@
     @test cost.variable_operation_cost.value.fuel_cost > 0
     # $/MMBtu in the table, $/MBtu in the model.
     @test cost.variable_operation_cost.value.fuel_cost ≈ gen.fuel_price / 1000.0
-    @test cost.variable_operation_cost.value.power_units.value == "NATURAL_UNITS"
     # Heat rates give an incremental curve over the output points.
     @test cost.variable_operation_cost.value.value_curve.value.curve_type == "INCREMENTAL"
     @test cost.variable_operation_cost.value.value_curve.value.function_data.value.function_type ==

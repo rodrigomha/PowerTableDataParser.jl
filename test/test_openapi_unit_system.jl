@@ -101,6 +101,14 @@ end
             @test doc["components"]["Area"][1]["power_units"] == power_units
             # ACBus declares no power_units field, so it carries none either way.
             @test !haskey(doc["components"]["ACBus"][1], "power_units")
+            # Cost curves have no basis: MW on x whatever the component's convention.
+            steam = only(
+                g for g in doc["components"]["ThermalStandard"] if
+                g["name"] == "101_STEAM_3"
+            )
+            curve = steam["operation_cost"]["variable_operation_cost"]
+            @test !haskey(curve, "power_units")
+            @test last(curve["value_curve"]["function_data"]["x_coords"]) ≈ 76.0
             @test length(doc["components"]["ACBus"]) == 73
             # The rows ride in both conventions; each component states its own basis,
             # while each row states the basis of its series.

@@ -299,7 +299,6 @@ function make_thermal_cost(
         variable_operation_cost = PC.ProductionVariableCostCurve(
             PC.FuelCurve(;
                 value_curve = PC.ValueCurve(value_curve),
-                power_units = IC.UnitSystem("NATURAL_UNITS"),
                 variable_cost_type = "FUEL",
                 fuel_cost = price,
                 vom_cost = _vom_curve(gen),
@@ -327,7 +326,6 @@ function make_thermal_cost(
                 value_curve = PC.ValueCurve(
                     _pwl_value_curve(gen, get_cost_pairs(gen, cols; per_unit = per_unit)),
                 ),
-                power_units = IC.UnitSystem("NATURAL_UNITS"),
                 variable_cost_type = "COST",
                 vom_cost = _vom_curve(gen),
             ),
@@ -360,7 +358,6 @@ function make_hydro_cost(
                 value_curve = PC.ValueCurve(
                     _pwinc_value_curve(gen, get_cost_pairs(gen, cols; per_unit = per_unit)),
                 ),
-                power_units = IC.UnitSystem("NATURAL_UNITS"),
                 variable_cost_type = "FUEL",
                 fuel_cost = price,
                 vom_cost = _vom_curve(gen),
@@ -383,7 +380,6 @@ function make_hydro_cost(
                 value_curve = PC.ValueCurve(
                     _pwl_value_curve(gen, get_cost_pairs(gen, cols; per_unit = per_unit)),
                 ),
-                power_units = IC.UnitSystem("NATURAL_UNITS"),
                 variable_cost_type = "COST",
                 vom_cost = _vom_curve(gen),
             ),
@@ -418,7 +414,6 @@ function make_renewable_cost(
         cost_type = "RENEWABLE",
         variable_operation_cost = PC.CostCurve(;
             value_curve = PC.ValueCurve(linear_curve(0.0)),
-            power_units = IC.UnitSystem("NATURAL_UNITS"),
             variable_cost_type = "COST",
             vom_cost = _vom_curve(gen),
         ),
@@ -437,7 +432,6 @@ function make_renewable_cost(
             value_curve = PC.ValueCurve(
                 _pwl_value_curve(gen, get_cost_pairs(gen, cols; per_unit = per_unit)),
             ),
-            power_units = IC.UnitSystem("NATURAL_UNITS"),
             variable_cost_type = "COST",
             vom_cost = _vom_curve(gen),
         ),
