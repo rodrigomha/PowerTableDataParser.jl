@@ -168,11 +168,11 @@ end
     for circuit in PDP.get_components(sys, "TransformerCircuit")
         # A tap ratio with no control block is PSS/E COD 0: a fixed tap.
         @test PDP.get_value(circuit, :control_objective) == "FIXED"
-        limits = PDP.get_value(circuit, :control_limits)
+        limits = PDP.get_value(circuit, :tap_ratio_limits)
         @test limits.min ≈ 0.9
         @test limits.max ≈ 1.1
         # A voltage target is a band whose ends coincide.
-        controlled = PDP.get_value(circuit, :controlled_quantity_limits)
+        controlled = PDP.get_value(circuit, :controlled_voltage_limits)
         @test controlled.min ≈ 1.0
         @test controlled.max ≈ 1.0
         @test controlled.min == controlled.max
